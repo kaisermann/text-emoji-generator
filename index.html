@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>TEXT EMOJI GENERATOR</title>
+  </head>
+  <style>
+    :root {
+      --bg: #000;
+      --text: #fff;
+      --radius: 8px;
+      --fontsize: 40px;
+      --padding: 0.5rem;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-transform: uppercase;
+      font-family: sans-serif;
+    }
+
+    .controls {
+      margin-right: 4rem;
+    }
+
+    #emoji {
+      display: inline-block;
+      font-size: var(--fontsize);
+      padding: calc(max(0.5rem, var(--padding) / 3)) var(--padding);
+      background-color: var(--bg);
+      color: var(--text);
+      border-radius: var(--radius);
+      font-family: sans-serif;
+      font-weight: bold;
+    }
+  </style>
+
+  <body>
+    <div class="controls">
+      <div>
+        <label for="bgColor">Background</label>
+        <input type="color" value="#ff0000" id="bgColor" />
+      </div>
+      <div>
+        <label for="textColor">Text</label>
+        <input type="color" value="#ffffff" id="textColor" />
+      </div>
+      <div>
+        <label for="borderRadius">Font size</label>
+        <input
+          type="range"
+          id="fontSize"
+          min="22"
+          max="80"
+          value="40"
+          step="1"
+        />
+      </div>
+      <div>
+        <label for="borderRadius">Border radius</label>
+        <input
+          type="range"
+          id="borderRadius"
+          min="2"
+          max="20"
+          value="12"
+          step="1"
+        />
+      </div>
+      <div>
+        <label for="borderRadius">Padding</label>
+        <input
+          type="range"
+          id="padding"
+          min="0.5"
+          max="2"
+          value="1"
+          step="0.05"
+        />
+      </div>
+    </div>
+
+    <div class="emoji-wrapper">
+      <span id="emoji" contenteditable>POTATO</span>
+    </div>
+
+    <script>
+      const bgWheel = document.getElementById("bgColor");
+      const textWheel = document.getElementById("textColor");
+      const borderRadius = document.getElementById("borderRadius");
+      const fontSize = document.getElementById("fontSize");
+      const padding = document.getElementById("padding");
+      const emoji = document.getElementById("emoji");
+
+      bgWheel.addEventListener("input", (e) => {
+        emoji.style.setProperty("--bg", e.target.value);
+      });
+
+      textWheel.addEventListener("input", (e) => {
+        emoji.style.setProperty("--text", e.target.value);
+      });
+
+      fontSize.addEventListener("input", (e) => {
+        emoji.style.setProperty("--fontsize", `${e.target.value}px`);
+      });
+
+      borderRadius.addEventListener("input", (e) => {
+        emoji.style.setProperty("--radius", `${e.target.value}px`);
+      });
+
+      padding.addEventListener("input", (e) => {
+        emoji.style.setProperty("--padding", `${e.target.value}rem`);
+      });
+
+      emoji.style.setProperty("--bg", bgWheel.value);
+      emoji.style.setProperty("--text", textWheel.value);
+      emoji.style.setProperty("--radius", `${borderRadius.value}px`);
+      emoji.style.setProperty("--padding", `${padding.value}rem`);
+    </script>
+  </body>
+</html>
