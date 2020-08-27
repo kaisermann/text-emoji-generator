@@ -1,5 +1,5 @@
 # text-emoji-generator
 
-Just a silly thing to help folks on Slack to create better text emoji badges
+A silly thing to help folks to create better text emoji badges on Slack.
 
 https://text-emoji-generator.netlify.app/
