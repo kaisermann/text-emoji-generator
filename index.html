@@ -1,145 +1,133 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <title>TEXT EMOJI GENERATOR</title>
-  </head>
 
-  <style>
-    :root {
-      --bg: #000;
-      --text: #fff;
-      --radius: 8px;
-      --fontsize: 40px;
-      --padding: 0.5rem;
-    }
+<head>
+  <title>TEXT EMOJI GENERATOR</title>
+  <script async src="http://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
 
-    body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      text-transform: uppercase;
-      font-family: sans-serif;
-    }
+<style>
+  :root {
+    --bg: #000;
+    --text: #fff;
+    --radius: 8px;
+    --fontsize: 40px;
+    --padding: 0.5rem;
+  }
 
-    .controls {
-      margin-right: 4rem;
-    }
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    background-color: rgb(1, 1, 1, 0);
+  }
 
-    .emoji-wrapper {
-      padding: 1rem 2rem;
-    }
+  .controls {
+    margin-right: 4rem;
+  }
 
-    .emoji-wrapper.dark {
-      background-color: #222;
-    }
+  .emoji-wrapper {
+    padding: 1rem 2rem;
+  }
 
-    .emoji {
-      display: inline-block;
-      font-size: var(--fontsize);
-      padding: calc(max(0.5rem, var(--padding) / 3)) var(--padding);
-      background-color: var(--bg);
-      color: var(--text);
-      border-radius: var(--radius);
-      font-family: sans-serif;
-      font-weight: bold;
-    }
-  </style>
+  .emoji-wrapper {
+    /* background-color: #222; */
+    background-color: rgb(1, 1, 1, 0);
+  }
 
-  <body>
-    <div class="controls">
-      <div>
-        <label for="bgColor">Background</label>
-        <input type="color" value="#ff0000" id="bgColor" />
-      </div>
-      <div>
-        <label for="textColor">Text</label>
-        <input type="color" value="#ffffff" id="textColor" />
-      </div>
-      <div>
-        <label for="borderRadius">Font size</label>
-        <input
-          type="range"
-          id="fontSize"
-          min="22"
-          max="80"
-          value="40"
-          step="1"
-        />
-      </div>
-      <div>
-        <label for="borderRadius">Border radius</label>
-        <input
-          type="range"
-          id="borderRadius"
-          min="2"
-          max="20"
-          value="12"
-          step="1"
-        />
-      </div>
-      <div>
-        <label for="borderRadius">Padding</label>
-        <input
-          type="range"
-          id="padding"
-          min="0.5"
-          max="2"
-          value="1"
-          step="0.05"
-        />
-      </div>
-    </div>
+  .emoji {
+    display: inline-block;
+    font-size: var(--fontsize);
+    padding: calc(max(0.5rem, var(--padding) / 3)) var(--padding);
+    background-color: var(--bg);
+    color: var(--text);
+    border-radius: var(--radius);
+    font-family: sans-serif;
+    font-weight: bold;
+  }
 
+  .emoji-save-wrapper {
+    padding: 1rem 2rem;
+  }
+
+  .emoji-save-wrapper #save-button {
+    padding: 1rem 2rem;
+    font-family: sans-serif;
+    font-weight: bold;
+    border: 0;
+    border-radius: 1rem;
+    background-color: #ccc;
+    font-size: 2rem;
+  }
+
+  .emoji-image-wrapper {
+    padding: 1rem 2rem;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  .emoji-image-wrapper #image-result {
+    padding: 1rem 2rem;
+    align-self: center;
+  }
+
+  .emoji-image-wrapper h2 {
+    text-align: center;
+    padding: 1rem 2rem;
+  }
+
+  .emoji-image-wrapper h3 {
+    text-align: center;
+    padding: 1rem 2rem;
+  }
+</style>
+
+<body>
+  <div class="controls">
     <div>
-      <div class="emoji-wrapper light">
-        <span class="emoji" contenteditable>POTATO</span>
-      </div>
-      <div class="emoji-wrapper dark">
-        <span class="emoji" contenteditable>POTATO</span>
-      </div>
+      <label for="bgColor">Background</label>
+      <input type="color" value="#ff0000" id="bgColor" />
     </div>
+    <div>
+      <label for="textColor">Text</label>
+      <input type="color" value="#ffffff" id="textColor" />
+    </div>
+    <div>
+      <label for="borderRadius">Font size</label>
+      <input type="range" id="fontSize" min="22" max="80" value="40" step="1" />
+    </div>
+    <div>
+      <label for="borderRadius">Border radius</label>
+      <input type="range" id="borderRadius" min="2" max="20" value="12" step="1" />
+    </div>
+    <div>
+      <label for="borderRadius">Padding</label>
+      <input type="range" id="padding" min="0.5" max="2" value="1" step="0.05" />
+    </div>
+  </div>
 
-    <script>
-      const bgWheel = document.getElementById("bgColor");
-      const textWheel = document.getElementById("textColor");
-      const borderRadius = document.getElementById("borderRadius");
-      const fontSize = document.getElementById("fontSize");
-      const padding = document.getElementById("padding");
-      const { body } = document;
-      const emojis = document.querySelectorAll(".emoji");
+  <div>
+    <div class="emoji-wrapper">
+      <span class="emoji" contenteditable>POTATO</span>
+    </div>
+  </div>
 
-      bgWheel.addEventListener("input", (e) => {
-        body.style.setProperty("--bg", e.target.value);
-      });
+  <div>
+    <div class="emoji-save-wrapper">
+      <button id="save-button">Build</button>
+    </div>
+  </div>
 
-      textWheel.addEventListener("input", (e) => {
-        body.style.setProperty("--text", e.target.value);
-      });
+  <div>
+    <div class="emoji-image-wrapper">
+    </div>
+  </div>
+  <script src="./script.js"></script>
+</body>
 
-      fontSize.addEventListener("input", (e) => {
-        body.style.setProperty("--fontsize", `${e.target.value}px`);
-      });
-
-      borderRadius.addEventListener("input", (e) => {
-        body.style.setProperty("--radius", `${e.target.value}px`);
-      });
-
-      padding.addEventListener("input", (e) => {
-        body.style.setProperty("--padding", `${e.target.value}rem`);
-      });
-
-      emojis.forEach((emoji) => {
-        emoji.addEventListener("input", (e) => {
-          emojis.forEach((el) => (el.textContent = e.target.textContent));
-        });
-      });
-
-      body.style.setProperty("--bg", bgWheel.value);
-      body.style.setProperty("--text", textWheel.value);
-      body.style.setProperty("--radius", `${borderRadius.value}px`);
-      body.style.setProperty("--padding", `${padding.value}rem`);
-    </script>
-  </body>
 </html>
