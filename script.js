@@ -7,7 +7,6 @@ const { body } = document;
 const emojis = document.querySelectorAll(".emoji");
 
 const saveButton = document.getElementById("save-button");
-// const imageResult = document.getElementById("image-result");
 const imageWrapper = document.querySelector(".emoji-image-wrapper")
 
 
@@ -35,13 +34,11 @@ saveButton.addEventListener("click", (e) => {
   const emoji = document.querySelector(".emoji-wrapper .emoji");
   const computedStyle = document.defaultView.getComputedStyle(emoji, "");
 
-  const paddingLeft = parseInt(computedStyle.paddingLeft)
   const paddingTop = parseInt(computedStyle.paddingTop)
   html2canvas(emoji, {
     backgroundColor: null,
     allowTaint: true,
     scrollX: -paddingTop,
-    // scrollY: -paddingLeft,
     removeContainer: true,
     width: emoji.clientWidth,
     height: emoji.clientHeight
