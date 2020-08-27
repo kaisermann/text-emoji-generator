@@ -41,7 +41,7 @@ saveButton.addEventListener("click", (e) => {
     backgroundColor: null,
     allowTaint: true,
     scrollX: -paddingTop,
-    scrollY: -paddingLeft,
+    // scrollY: -paddingLeft,
     removeContainer: true,
     width: emoji.clientWidth,
     height: emoji.clientHeight
