@@ -108,6 +108,7 @@
       const fontSize = document.getElementById("fontSize");
       const padding = document.getElementById("padding");
       const { body } = document;
+      const emojis = document.querySelectorAll(".emoji");
 
       bgWheel.addEventListener("input", (e) => {
         body.style.setProperty("--bg", e.target.value);
@@ -127,6 +128,12 @@
 
       padding.addEventListener("input", (e) => {
         body.style.setProperty("--padding", `${e.target.value}rem`);
+      });
+
+      emojis.forEach((emoji) => {
+        emoji.addEventListener("input", (e) => {
+          emojis.forEach((el) => (el.textContent = e.target.textContent));
+        });
       });
 
       body.style.setProperty("--bg", bgWheel.value);
